@@ -1,0 +1,812 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  body {
+    background-color: #f5f5f5;
+  }
+  
+  /* Header Styles */
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    max-height: 60px;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  nav ul li {
+    margin-left: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #8d0909;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    color: #410505;
+  }
+  
+  .highlight {
+    padding: 8px 15px;
+    background-color: #740b04;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 5px;
+  }
+
+/* New styles for E-Scooter section */
+.escooter-section {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #450101;
+  color: white;
+  padding: 30px;
+}
+
+.rifas-title {
+  text-align: center;
+  font-size: 2.5em;
+  background-color: #2b0300;
+  color: white;
+  font-weight: bold;
+}
+
+.escooter-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.escooter-detail-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.escooter-detail-item {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 5px;
+}
+
+.escooter-detail-item strong {
+  color: white;
+  font-weight: bold;
+}
+
+.escooter-features h3 {
+  color: white;
+  text-align: center; 
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.escooter-features ul {
+  color: white; 
+  text-align: center; 
+  list-style-type: none; 
+  padding: 0;
+  font-weight: bold;
+}
+
+  /* Carousel Banner */
+  
+  .carousel-section{
+      background-color: #830d04 !important;
+  }
+  
+  .carousel-container {
+    background-color: #830d04;
+    color: #830d04;
+    padding: 1px;
+    text-align: center;
+  }
+  
+  .carousel-container {
+    width: 100%;
+    max-width: 800px; 
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-media {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-control-btn {
+    background-color: rgba(116, 11, 4, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.video-control-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.video-progress-bar {
+  width: 100%;
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .carousel-media {
+        height: 300px;
+    }
+}
+
+  /* Price Banner */
+  .price-banner {
+    background-color: #830d04;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .price-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .price-container h1 {
+    font-size: 42px;
+    font-weight: bold;
+  }
+  
+  /* Number Selection */
+  .number-selection {
+    padding: 25px;
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  .number-selection h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .status-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 15px;
+  }
+  
+  .indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sold-dot {
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 25px;
+  }
+  
+  .available-dot {
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 25px;
+  }
+  
+  .search-container {
+    margin: 20px 0;
+  }
+  
+  #search-input {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  #search-btn {
+    padding: 8px 30px;
+    background-color: #fff;
+    border: 1px solid #c42d2d;
+    border-radius: 20px;
+    color: #c42d2d;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  #search-btn:hover {
+    background-color: #c42d2d;
+    color: #fff;
+  }
+  
+  #search-result {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+/* Estilos para el mensaje de boletos agotados */
+.sold-out-message {
+  text-align: justify;
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #740b04;
+}
+
+.sold-out-message .emoji {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+.sold-out-message h3 {
+  font-size: 28px;
+  margin: 15px 0;
+  color: #740b04;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.sold-out-message p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.separator {
+  border: none;
+  height: 2px;
+  background-color: rgba(116, 11, 4, 0.2);
+  margin: 15px auto;
+  width: 80%;
+}
+
+.message-content {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+/* Mejoras para modo responsivo */
+@media (max-width: 768px) {
+  .sold-out-message {
+    padding: 30px 15px;
+    margin: 20px auto;
+  }
+  
+  .sold-out-message .emoji {
+    font-size: 50px;
+  }
+  
+  .sold-out-message h3 {
+    font-size: 22px;
+  }
+}
+
+  /* Pagination Styles */
+  .pagination-top, .pagination-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 15px 0;
+  }
+  
+  #prev-page-btn, #next-page-btn, #prev-page-btn-top, #next-page-btn-top {
+    padding: 8px 15px;
+    background-color: #fff;
+    border: 1px solid #c42d2d;
+    border-radius: 20px;
+    color: #c42d2d;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  #prev-page-btn:hover, #next-page-btn:hover, #prev-page-btn-top:hover, #next-page-btn-top:hover {
+    background-color: #c42d2d;
+    color: #fff;
+  }
+  
+  /* Available Numbers */
+  .available-numbers {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .available-numbers h2 {
+    font-size: 24px;
+    color: #960101;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 5px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+  
+  .number-item {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .number-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .sold {
+    background-color: #000000;
+    color: #ffffff;
+    cursor: not-allowed;
+  }
+  
+  .selected {
+    background-color: #f0ec19;
+    border-color: #2e0000;
+    font-weight: bold;
+  }
+  
+  .whatsapp-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #ffffff; 
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    animation: pulse 1.5s infinite;
+}
+
+/* Añade la animación pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+    
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }  
+
+  /* Selection Summary */
+  .selection-summary {
+    padding: 20px;
+    background-color: #240f0f;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .selected-count {
+    font-size: 18px;
+    margin: 15px 0;
+  }
+  
+  .selected-numbers {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  
+  .selected-number {
+    padding: 5px 10px;
+    background-color: #690202;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .reserve-btn {
+    background-color: #640101;
+    color: #ffffff;
+    border: none;
+    padding: 10px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: all 0.3s;
+  }
+  
+  .reserve-btn:hover {
+    background-color: #8e0202;
+  }
+  
+  .note {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #ccc;
+  }
+  
+  /* Reservation Form */
+  
+  #reserve-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #reserve-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  #reserve-form h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #640101;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input, .form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .form-actions button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #cancel-reserve {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  #confirm-reserve {
+    background-color: #640101;
+    border: none;
+    color: white;
+  }
+  
+  .form-note {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+  }
+  
+  .required {
+    color: #b30000;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 15px;
+    text-align: center;
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    nav ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 15px;
+    }
+  
+    nav ul li {
+      margin: 5px 10px;
+    }
+  
+    .status-indicators {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .indicator {
+      justify-content: center;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .form-actions button {
+      width: 100%;
+    }
+    /* Estilos para el Casino de la Suerte */
+.casino-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+  }
+  
+  .casino-image-container {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+  }
+  
+  .casino-image-container:hover {
+    transform: scale(1.05);
+  }
+  
+  .casino-image-container::after {
+    content: "¡Haz clic para obtener números de la suerte!";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+    color: #740b04;
+    font-weight: bold;
+  }
+  
+  .casino-image {
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #fff;
+  }
+  
+  #casino-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+  }
+  
+  .casino-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .casino-modal-content h3 {
+    color: #740b04;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  
+  .casino-select-container {
+    margin-bottom: 20px;
+  }
+  
+  #lucky-number-count {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  #lucky-numbers-container {
+    margin: 20px 0;
+    min-height: 100px;
+  }
+  
+  .lucky-numbers-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .lucky-number-item {
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #2e0000;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    animation: popIn 0.3s ease-out;
+  }
+  
+  @keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .casino-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .casino-actions button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  #refresh-numbers {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  #refresh-numbers:hover {
+    background-color: #e0e0e0;
+  }
+  
+  #accept-lucky-numbers {
+    background-color: #640101;
+    border: none;
+    color: white;
+  }
+  
+  #accept-lucky-numbers:hover {
+    background-color: #8e0202;
+  }
+  
+  /* Responsividad para el Casino de la Suerte */
+  @media (max-width: 768px) {
+    .casino-image {
+      max-width: 150px;
+    }
+    
+    .casino-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .casino-actions button {
+      width: 100%;
+    }
+    
+    .casino-modal-content {
+      padding: 20px;
+    }
+  }
+  }
