@@ -1,169 +1,408 @@
-<html>
- <head>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <script>
-   let currentPage = 1;
-   const numbersPerPage = 500;
-   const selectedNumbers = new Set();
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   function mostrarCasino() {
-     document.getElementById('casinoModal').classList.remove('hidden');
-   }
+  	<!-- Favicon -->
+    <link rel="icon" href="REX MAX LOGO.png" type="image/x-icon">
+    
+  <title>REX MAX</title>
+     <link rel="stylesheet" href="estilos.css">
+  <style>
+    
+    
+    /* Estilos para el Casino de la Suerte */
+    .casino-container {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    
+    .casino-image-container {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    .casino-image-container:hover {
+      transform: scale(1.05);
+    }
+    
+    .casino-image {
+      max-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    #casino-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1100;
+    }
+    
+    .casino-modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    
+    .casino-modal-content h3 {
+      color: #740b04;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    
+    .casino-select-container {
+      margin-bottom: 20px;
+    }
+    
+    #lucky-number-count {
+      padding: 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    #lucky-numbers-container {
+      margin: 20px 0;
+      min-height: 100px;
+    }
+    
+    .lucky-numbers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    
+    .lucky-number-item {
+      padding: 10px 15px;
+      background-color: #f0ec19;
+      border: 1px solid #2e0000;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    .casino-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .casino-actions button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    #refresh-numbers {
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      color: #333;
+    }
+    
+    #refresh-numbers:hover {
+      background-color: #e0e0e0;
+    }
+    
+    #accept-lucky-numbers {
+      background-color: #640101;
+      border: none;
+      color: white;
+    }
+    
+    #accept-lucky-numbers:hover {
+      background-color: #8e0202;
+    }
+    
+    @media (max-width: 768px) {
+      .casino-image {
+        max-width: 150px;
+      }
+      
+      .casino-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .casino-actions button {
+        width: 100%;
+      }
+      
+    }
+  </style>
 
-   function cerrarCasino() {
-     document.getElementById('casinoModal').classList.add('hidden');
-   }
-
-   function generarNumeros() {
-     const cantidad = document.getElementById('selectCasino').value;
-     const disponibles = Array.from(document.querySelectorAll('.bg-white')).map(el => el.textContent.trim());
-     const seleccionados = [];
-
-     while (seleccionados.length < cantidad && disponibles.length > 0) {
-       const index = Math.floor(Math.random() * disponibles.length);
-       seleccionados.push(disponibles.splice(index, 1)[0]);
-     }
-
-     document.getElementById('divGeneradosalAzar').innerHTML = seleccionados.map(num => `<div class="w-12 h-12 bg-black text-white flex items-center justify-center rounded m-1">${num}</div>`).join('');
-     document.getElementById('btnLosQuiero').style.display = 'block';
-   }
-
-   function renderNumbers() {
-     const start = (currentPage - 1) * numbersPerPage + 1;
-     const end = Math.min(start + numbersPerPage - 1, 20000);
-     const numbersContainer = document.getElementById('numbersContainer');
-     numbersContainer.innerHTML = '';
-
-     for (let i = start; i <= end; i++) {
-       const numberDiv = document.createElement('div');
-       numberDiv.className = 'w-12 h-12 bg-white text-black flex items-center justify-center rounded border border-black m-1';
-       numberDiv.textContent = i.toString().padStart(5, '0');
-       numberDiv.ondblclick = () => selectNumber(numberDiv);
-       numbersContainer.appendChild(numberDiv);
-     }
-   }
-
-   function nextPage() {
-     if (currentPage * numbersPerPage < 20000) {
-       currentPage++;
-       renderNumbers();
-     }
-   }
-
-   function previousPage() {
-     if (currentPage > 1) {
-       currentPage--;
-       renderNumbers();
-     }
-   }
-
-   function selectNumber(element) {
-     const number = element.textContent.trim();
-     if (selectedNumbers.has(number)) {
-       selectedNumbers.delete(number);
-       element.classList.remove('bg-yellow-500');
-       element.classList.add('bg-white');
-     } else if (selectedNumbers.size < 100) {
-       selectedNumbers.add(number);
-       element.classList.remove('bg-white');
-       element.classList.add('bg-yellow-500');
-     }
-
-     if (selectedNumbers.size > 0) {
-       document.getElementById('btnApartar').style.display = 'block';
-     } else {
-       document.getElementById('btnApartar').style.display = 'none';
-     }
-
-     updateSelectedNumbersSection();
-   }
-
-   function apartarNumeros() {
-     selectedNumbers.forEach(number => {
-       const element = Array.from(document.querySelectorAll('.w-12.h-12')).find(el => el.textContent.trim() === number);
-       if (element) {
-         element.classList.remove('bg-green-500');
-         element.classList.add('bg-black', 'text-white');
-         element.onclick = null;
-       }
-     });
-     selectedNumbers.clear();
-     document.getElementById('btnApartar').style.display = 'none';
-     updateSelectedNumbersSection();
-   }
-
-   function updateSelectedNumbersSection() {
-     const selectedNumbersContainer = document.getElementById('divSeleccionados');
-     selectedNumbersContainer.innerHTML = '';
-     selectedNumbers.forEach(number => {
-       const button = document.createElement('button');
-       button.className = 'boletospanSel user-select-none';
-       button.textContent = number;
-       button.onlclick = () => selectNumber(button);
-       selectedNumbersContainer.appendChild(button);
-     });
-
-     document.getElementById('countBolSelec').textContent = `${selectedNumbers.size} boletos Seleccionados`;
-   }
-
-   document.addEventListener('DOMContentLoaded', renderNumbers);
-  </script>
- </head>
- <body class="bg-white">
-  <div class="flex justify-center py-4" style="background-color: #9b0b0b;">
-   <img alt="REX MAX Logo" class="h-24" height="100" src="C:\Users\itmkp\OneDrive\Imágenes\REX MAX LOGO 2.png" height="200" class="mt-2 mx-auto d-block"/>
-  </div>
-  <div class="text-center mt-4">
-   <h2 class="text-xl font-bold">
-    PRECIO X BOLETO
-   </h2>
-   <h1 class="text-4xl font-bold text-green-600">
-    $15 PESOS
-   </h1>
-  </div>
-  <div class="text-center mt-4">
-   <h3 class="text-lg font-bold">
-    HAZ CLIC EN TU NÚMERO DE LA SUERTE
-   </h3>
-   <div class="flex justify-center items-center mt-2">
-    <div class="flex items-center mr-4">
-     <div class="w-6 h-6 bg-black rounded-full mr-2">
-     </div>
-     <span>
-      Negros (Vendidos)
-     </span>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="REX MAX LOGO 2.png" alt="REX MAX Logo" class="logo">
     </div>
-    <div class="flex items-center">
-     <div class="w-6 h-6 border-2 border-black rounded-full mr-2">
+    <nav>
+      <ul>
+        <li><a href="REX MAX.html">Inicio</a></li>
+        <li><a href="#">Verificador de boletos</a></li>
+        <li><a href="#">Métodos de pago</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+        <li><a href="lista.html" class="highlight">Comprar boleto</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+
+    <section class="price-banner">
+      <div class="price-container">
+        <h2>PRECIO x BOLETO</h2>
+        <h1>$10 PESOS</h1>
+      </div>
+    </section>
+
+    <h2 class="rifas-title">E-SCOOTER TODOTERRENO</h2>
+    <section class="escooter-section">
+      <div class="escooter-details">
+        <div class="escooter-detail-column">
+          <div class="escooter-detail-item">
+            <strong>Tamaño abierto:</strong>
+            <span>1340 * 630 * 1320 mm</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Tamaño de plegado:</strong>
+            <span>1340 * 630 * 625 mm</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Peso neto:</strong>
+            <span>38 kg</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Material del marco:</strong>
+            <span>Aleación de aluminio</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Neumático:</strong>
+            <span>11 pulgadas</span>
+          </div>
+        </div>
+        <div class="escooter-detail-column">
+          <div class="escooter-detail-item">
+            <strong>Batería:</strong>
+            <span>Iones de litio 48 V/18,2 Ah</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Alcance máximo:</strong>
+            <span>70-100 km</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Velocidad:</strong>
+            <span>40 km/h</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Motor:</strong>
+            <span>48 V / 1000 W * 2</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Carga máxima:</strong>
+            <span>120 kg</span>
+          </div>
+          <div class="escooter-detail-item">
+            <strong>Nivel de impermeabilidad:</strong>
+            <span>IPX4</span>
+          </div>
+        </div>
+      </div>
+      <div class="escooter-features">
+        <h3>Características Especiales</h3>
+        <ul>
+          <li>✓ Accionamiento por motor doble</li>
+          <li>✓ Batería extraíble</li>
+          <li>✓ Amortiguadores triples delanteros y traseros</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="carousel-section">
+      </head>
+    <body>
+      <p>   </p>
+        <div id="carousel" class="carousel-container">
+            <div id="mediaContainer"></div>
+
+            <div class="carousel-controls">
+                <button id="prevBtn" class="carousel-control-btn">←</button>
+                <button id="nextBtn" class="carousel-control-btn">→</button>
+            </div>
+            <div id="mediaContainer">
+            
+            </div>
      </div>
-     <span>
-      Blancos (Disponibles)
-     </span>
+    </section>
+
+    <section class="price-banner">
+      <div class="price-container">
+        <h2>PRECIO x BOLETO</h2>
+        <h1>$10 PESOS</h1>
+      </div>
+    </section>
+
+    <section class="number-selection">
+      <h2>HAZ CLIC EN TU NÚMERO DE LA SUERTE</h2>
+      <div class="status-indicators">
+        <div class="indicator">
+          <span class="sold-dot">0000</span>
+          <p>Negros (Vendidos)</p>
+        </div>
+        <div class="indicator">
+          <span class="available-dot">0000</span>
+          <p>Blancos (Disponibles)</p>
+        </div>
+      </div>
+      <div class="search-container">
+        <input id="search-input" type="text" placeholder="Ingrese un número">
+        <button id="search-btn">BUSCAR</button>
+        <p id="search-result"></p>
+      </div>
+      
+      <!-- Casino de la Suerte (Nuevo) -->
+      <div class="casino-container">
+        <div class="casino-image-container">
+          <img src="casino.gif" alt="Casino de la Suerte" class="casino-image">
+        </div>
+      </div>
+      <!-- Fin Casino de la Suerte -->
+      
+      <div class="pagination-top">
+        <button id="prev-page-btn-top">Anterior</button>
+        <span id="current-page-top">Página 1</span>
+        <button id="next-page-btn-top">Siguiente</button>
+      </div>
+      <div class="numbers-grid" id="numbers-grid">
+        <!-- Numbers will be generated by JavaScript -->
+      </div>
+      <div class="pagination-bottom">
+        <button id="prev-page-btn">Anterior</button>
+        <span id="current-page">Página 1</span>
+        <button id="next-page-btn">Siguiente</button>
+      </div>
+    </section>
+    <section class="selection-summary">
+      <p>Para agregar otro, favor de seleccionarlo</p>
+      <div class="selected-count">
+        <span id="selected-count">0</span> boletos Seleccionados
+      </div>
+      <div class="selected-numbers" id="selected-numbers">
+        <!-- Selected numbers will appear here -->
+      </div>
+      <button id="reserve-btn" class="reserve-btn">APARTAR</button>
+      <p class="note">Para dejar un boleto presione sobre el número</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 REX MAX. Todos los derechos reservados.</p>
+  </footer>
+  
+  <!-- Modal para reservas -->
+  <div id="reserve-panel">
+    <form id="reserve-form">
+      <h3>Datos para apartar boletos</h3>
+      <div class="form-group">
+        <label for="phone-number">Teléfono: <span class="required">*</span></label>
+        <input id="phone-number" type="text" required>
+      </div>
+      <div class="form-group">
+        <label for="name">Nombre: <span class="required">*</span></label>
+        <input id="name" type="text" required>
+      </div>
+      <div class="form-group">
+        <label for="last-name">Apellido: <span class="required">*</span></label>
+        <input id="last-name" type="text" required>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado: <span class="required">*</span></label>
+        <select id="estado" required>
+          <option value="">Seleccione un estado</option>
+          <option value="Aguascalientes">Aguascalientes</option>
+          <option value="Baja California">Baja California</option>
+          <option value="Baja California Sur">Baja California Sur</option>
+          <option value="Campeche">Campeche</option>
+          <option value="Chiapas">Chiapas</option>
+          <option value="Chihuahua">Chihuahua</option>
+          <option value="Coahuila">Coahuila</option>
+          <option value="Colima">Colima</option>
+          <option value="Ciudad de México">Ciudad de México</option>
+          <option value="Durango">Durango</option>
+          <option value="Estado de México">Estado de México</option>
+          <option value="Guanajuato">Guanajuato</option>
+          <option value="Guerrero">Guerrero</option>
+          <option value="Hidalgo">Hidalgo</option>
+          <option value="Jalisco">Jalisco</option>
+          <option value="Michoacán">Michoacán</option>
+          <option value="Morelos">Morelos</option>
+          <option value="Nayarit">Nayarit</option>
+          <option value="Nuevo León">Nuevo León</option>
+          <option value="Oaxaca">Oaxaca</option>
+          <option value="Puebla">Puebla</option>
+          <option value="Querétaro">Querétaro</option>
+          <option value="Quintana Roo">Quintana Roo</option>
+          <option value="San Luis Potosí">San Luis Potosí</option>
+          <option value="Sinaloa">Sinaloa</option>
+          <option value="Sonora">Sonora</option>
+          <option value="Tabasco">Tabasco</option>
+          <option value="Tamaulipas">Tamaulipas</option>
+          <option value="Tlaxcala">Tlaxcala</option>
+          <option value="Veracruz">Veracruz</option>
+          <option value="Yucatán">Yucatán</option>
+          <option value="Zacatecas">Zacatecas</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" id="cancel-reserve">CANCELAR</button>
+        <button type="submit" id="confirm-reserve">APARTAR</button>
+      </div>
+      <p class="form-note">Los campos marcados con <span class="required">*</span> son obligatorios</p>
+    </form>
+  </div>
+  
+<!-- Botón de WhatsApp -->
+<a href="https://wa.me/523481144355?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20los%20patínes%20eléctricos" class="whatsapp-button" target="_blank">
+  <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+  <!-- Modal para Casino de la Suerte (Nuevo) -->
+  <div id="casino-modal">
+    <div class="casino-modal-content">
+      <h3>¿Cuál será tu número de la suerte?</h3>
+      <div class="casino-select-container">
+        <select id="lucky-number-count">
+          <option value="">Selecciona cuántos números quieres</option>
+          <!-- Las opciones del 1 al 100 se generarán con JavaScript -->
+        </select>
+      </div>
+      <div id="lucky-numbers-container"></div>
+      <div class="casino-actions">
+        <button id="refresh-numbers" type="button">Cambiar números</button>
+        <button id="accept-lucky-numbers" type="button">Aceptar</button>
+      </div>
     </div>
-   </div>
-   <div class="mt-4">
-    <input class="border-2 border-gray-300 rounded p-2" placeholder="0000" type="text"/>
-    <button class="bg-teal-400 text-white font-bold py-2 px-4 rounded ml-2">
-     BUSCAR
-    </button>
-   </div>
-   <div class="flex justify-center items-center mt-2">
-    <img alt="Casino de la Suerte banner" class="cursor-pointer" height="100" onclick="mostrarCasino()" src="C:\Users\itmkp\Downloads\casino.gif" width="300"/>
-   </div>
   </div>
-  <div class="flex justify-center mt-4">
-   <button class="bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded mr-2" onclick="previousPage()">
-    Anterior
-   </button>
-   <button class="bg-green-500 text-white font-bold py-2 px-4 rounded" onclick="nextPage()">
-    Siguiente
-   </button>
-  </div>
-  <div class="grid grid-cols-10 gap-1 mt-4 px-4" id="numbersContainer">
-   <!-- Numbers will be rendered here by JavaScript -->
-  </div>
-  <div class="text-center mt-4">
-   <button class="bg-green-500 text-white font-bold py-2 px-4 rounded hidden" id="btnApartar" onclick="apartarNumeros()">
-   
+
+  <script src="script.js"></script>
+</body>
+</html>
